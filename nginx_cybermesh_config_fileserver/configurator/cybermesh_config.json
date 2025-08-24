@@ -12,119 +12,27 @@
             "domain": "chatgpt.com"
         },
         {
-            "domain": "openai.com"
-        },
-        {
             "domain_regex": "^(.*?)\\.openai\\.com$"
         },
         {
-            "domain": "discord.com"
+            "process_name": "chrome.exe"
         },
         {
-            "domain": "discordstatus.com"
+            "process_name": "qtranslate.exe"
         },
         {
-            "domain": "discord.media"
+            "process_name": "Update.exe"
         },
         {
-            "domain": "discord.gg"
+            "process_name": "Discord.exe"
         },
         {
-            "domain": "cdn.discordapp.com"
+            "process_name": "DeepL.exe"
         },
         {
-            "domain_regex": "^(.*?)\\.discord\\.media$"
-        },
-        {
-            "domain_regex": "^(.*?)\\.discordapp\\.net$"
-        },
-        {
-            "domain_regex": "^(.*?)\\.discord\\.com$"
-        },
-        {
-            "domain_regex": "^(.*?)\\.discord\\.gg$"
-        },
-        {
-            "domain": "discordapp.com"
-        },
-        {
-            "domain_regex": "^(.*?)\\.googleapis\\.com$"
-        },
-        {
-            "domain": "notion.so"
-        },
-        {
-            "domain_regex": "^(.*?)\\.notion\\.so$"
-        },
-        {
-            "domain": "figma.com"
-        },
-        {
-            "domain": "apple.com"
-        },
-        {
-            "domain_regex": "^(.*?)\\.apple\\.com$"
-        },
-        {
-            "domain": "appleid.cdn-apple.com"
-        },
-        {
-            "domain": "canva.com"
-        },
-        {
-            "domain_regex": "^(.*?)\\.canva\\.com$"
-        },
-        {
-            "domain": "openwrt.org"
-        },
-        {
-            "domain_regex": "^(.*?)\\.youtube\\.com$"
-        },
-        {
-            "domain": "youtube.com"
-        },
-        {
-            "domain": "yt3.ggpht.com"
-        },
-        {
-            "domain": "googlevideo.com"
-        },
-        {
-            "domain": "play.google.com"
-        },
-        {
-            "domain": "ytstatic.l.google.com"
-        },
-        {
-            "domain": "medium.com"
-        },
-        {
-            "domain": "jetbrains.com"
-        },
-        {
-            "domain_regex": "^(.*?)\\.jetbrains\\.com$"
-        },
-        {
-            "domain_regex": "^(.*?)\\.googlevideo\\.com$"
-        },
-        {
-            "domain": "i.ytimg.com"
-        },
-        {
-            "domain": "googleads.g.doubleclick.net"
-        },
-        {
-            "domain": "2ip.ru"
-        },
-        {
-            "domain": "www.ccboot.com"
-        },
-        {
-            "domain": "www.vdo.ninja"
-        },
-        {
-            "domain": "www.splitcam.com"
+            "process_name": "CefSharp.BrowserSubprocess.exe"
         }
+  
     ],
     "ping": {
         "connect": {
