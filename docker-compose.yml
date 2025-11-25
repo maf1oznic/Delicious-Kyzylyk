@@ -31,6 +31,12 @@ services:
       - ./xray:/etc/xray
       - ./connection:/connection
 
-#volumes:
-  #xray_mount:
-  #connection_mount:
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./nginx/sni.conf.template:/etc/nginx/templates/sni.conf.template
+      - ./nginx/site:/var/www/html/site
+      - ./certbot-etc:/etc/letsencrypt/

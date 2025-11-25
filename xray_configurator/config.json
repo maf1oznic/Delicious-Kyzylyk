@@ -23,8 +23,8 @@
                 "security": "reality",
                 "realitySettings": {
                     "show": false,
-                    "dest": "#SNI:443",
-                    "xver": 0,
+                    "dest": "nginx:8443",
+                    "xver": 1,
                     "serverNames": [
                         "#SNI"
                     ],
