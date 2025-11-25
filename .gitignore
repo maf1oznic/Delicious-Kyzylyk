@@ -1,3 +1,5 @@
 /nginx_cybermesh_config_fileserver/share/*
 /nginx_cybermesh_config_fileserver/connstring.txt
 /nginx_cybermesh_config_fileserver/output.txt
+.env
+/certbot-etc
