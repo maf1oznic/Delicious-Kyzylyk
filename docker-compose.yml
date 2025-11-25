@@ -22,9 +22,10 @@ services:
     container_name: xray_configurator
     build: xray_configurator/.
     environment:
-      - SNI=www.samsung.com
+      - SNI=${DOMAIN}
       - NAME=KYZYLYK
       - USERCOUNT=50
+    env_file: .env
     networks:
       - bridge
     volumes:    
@@ -35,6 +36,8 @@ services:
     image: nginx
     container_name: nginx
     restart: unless-stopped
+    networks:
+      - bridge
     env_file: .env
     volumes:
       - ./nginx/sni.conf.template:/etc/nginx/templates/sni.conf.template
