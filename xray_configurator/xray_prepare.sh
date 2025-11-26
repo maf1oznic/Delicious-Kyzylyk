@@ -4,10 +4,22 @@ if [ ! -f /connection/connection.txt ]; then
 
 unzip xray.zip
 
-# XRay config
+# Select transport configuration
+if [ "$TRANSPORT" = "grpc" ]; then
+    CONFIG_FILE="config_grpc.json"
+    CONNSTRING_FILE="connstring_grpc.txt"
+    CLIENT_FILE="client_grpc.json"
+    echo "Using gRPC transport"
+else
+    CONFIG_FILE="config_tcp.json"
+    CONNSTRING_FILE="connstring_tcp.txt"
+    CLIENT_FILE="client_tcp.json"
+    echo "Using TCP transport"
+fi
 
+# XRay config
 rm /etc/xray/config.json
-cp config.json /etc/xray/config.json
+cp $CONFIG_FILE /etc/xray/config.json
 
 key_x25519=$(/xray x25519)
 PKEY=$(echo "$key_x25519" | awk '/Private key:/ {print $3}')
@@ -20,11 +32,9 @@ sed -i -e "s/#SID/$SID/g" /etc/xray/config.json
 sed -i -e "s/#SNI/$SNI/g" /etc/xray/config.json
 
 # Connection string for ease of access
+IP=$(curl -s ipinfo.io/ip)
 
-#cp -fr connstring.txt /connection/connstring.txt
-IP=$(curl ipinfo.io/ip)
-
-BASECONNSTRING=`cat connstring.txt`
+BASECONNSTRING=$(cat $CONNSTRING_FILE)
 BASECONNSTRING=$(echo "$BASECONNSTRING" |
 sed "s/#IP/$IP/g" |
 sed "s/#SNI/$SNI/g" |
@@ -32,13 +42,12 @@ sed "s/#PUBKEY/$PUBKEY/g" |
 sed "s/#SID/$SID/g")
 
 # Generate users
-
 CLIENTSARRAY=''
 CONNSTRINGARRAY=''
 for i in $(seq 1 $USERCOUNT);
 do
     # New entry in config.json
-    NEWCLIENT=`cat client.json`
+    NEWCLIENT=$(cat $CLIENT_FILE)
     UUID=$(/xray uuid)
     NEWCLIENT=$(echo "$NEWCLIENT" | sed "s/#UUID/$UUID/g" | sed "s/#USERNAME/user_$i/g")    
     if [ ! $i = $USERCOUNT ]; then
@@ -62,16 +71,16 @@ sed -i -e "s|#CLIENTS|$CLIENTSARRAY|g" /etc/xray/config.json
 sed -i -e "s|@|\\n|g" /etc/xray/config.json
 
 # Connection file to serve on nginx
-
 touch /connection/connection.txt
 
 echo '{' >> /connection/connection.txt
 echo "\"PUBKEY\" : \"$PUBKEY\"," >> /connection/connection.txt
 echo "\"UUID\" : \"$UUID\"," >> /connection/connection.txt
 echo "\"SID\" : \"$SID\"," >> /connection/connection.txt
-echo "\"SNI\" : \"$SNI\"" >> /connection/connection.txt
+echo "\"SNI\" : \"$SNI\"," >> /connection/connection.txt
+echo "\"TRANSPORT\" : \"$TRANSPORT\"" >> /connection/connection.txt
 echo '}' >> /connection/connection.txt
 
 fi
 
-echo "Configuration is complete"
+echo "Configuration is complete for $TRANSPORT transport"

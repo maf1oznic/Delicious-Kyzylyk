@@ -19,8 +19,12 @@
                 "decryption": "none"
             },
             "streamSettings": {
-                "network": "tcp",
+                "network": "grpc",
                 "security": "reality",
+                "grpcSettings": {
+                    "serviceName": "",
+                    "multiMode": false
+                },
                 "realitySettings": {
                     "show": false,
                     "dest": "nginx:8443",
