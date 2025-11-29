@@ -1,0 +1,1 @@
+vless://#UUID@#IP:443?security=tls&type=xhttp&headerType=&path=%2Fxhttp&host=&mode=stream-one&extra=%7B%22scMaxEachPostBytes%22%3A+200000%2C+%22scMaxConcurrentPosts%22%3A+4%2C+%22scMinPostsIntervalMs%22%3A+200%2C+%22xPaddingBytes%22%3A+%22100-1000%22%2C+%22noGRPCHeader%22%3A+false%7D&sni=#SNI&fp=##NAME

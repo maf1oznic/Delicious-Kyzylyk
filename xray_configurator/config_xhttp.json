@@ -1,0 +1,57 @@
+{
+    "log": {
+        "access": "/etc/xray/access.log",
+        "error": "/etc/xray/error.log",
+        "loglevel": "error"
+    },
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": []
+    },
+    "inbounds": [
+        {
+            "port": 443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    #CLIENTS
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "security": "tls",
+                "tlsSettings": {
+                "serverName": "#SNI",
+                "alpn": [
+                    "h2",
+                    "http/1.1"
+                ],
+                "certificates": [
+                    {
+                    "certificateFile": "/etc/letsencrypt/live/#SNI/fullchain.pem",
+                    "keyFile": "/etc/letsencrypt/live/#SNI/privkey.pem"
+                    }
+                ]
+                },
+                "xhttpSettings": {
+                "path": "/xhttp",
+                "mode": "stream-one",
+                "scMaxEachPostBytes": 200000,
+                "scMaxConcurrentPosts": 4,
+                "scMinPostsIntervalMs": 200
+                }
+        }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ]
+}

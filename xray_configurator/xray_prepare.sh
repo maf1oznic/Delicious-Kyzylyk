@@ -10,6 +10,13 @@ if [ "$TRANSPORT" = "grpc" ]; then
     CONNSTRING_FILE="connstring_grpc.txt"
     CLIENT_FILE="client_grpc.json"
     echo "Using gRPC transport"
+
+elif [ "$TRANSPORT" = "xhttp" ]; then
+    CONFIG_FILE="config_xhttp.json"
+    CONNSTRING_FILE="connstring_xhttp.txt"
+    CLIENT_FILE="client_xhttp.json"
+    echo "Using XHTTP transport"
+
 else
     CONFIG_FILE="config_tcp.json"
     CONNSTRING_FILE="connstring_tcp.txt"
