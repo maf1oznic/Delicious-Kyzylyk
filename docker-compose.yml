@@ -11,6 +11,7 @@ services:
     #build: xray_container/.
     volumes:    
       - ./xray:/etc/xray
+      - ./certbot-etc:/etc/letsencrypt/
     depends_on:
       xray_configurator: 
         condition: service_completed_successfully
