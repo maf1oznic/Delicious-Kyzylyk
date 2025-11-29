@@ -18,7 +18,7 @@ COPY connstring_grpc.txt /connstring_grpc.txt
 COPY connstring_xhttp.txt /connstring_xhttp.txt
 COPY client_tcp.json /client_tcp.json
 COPY client_grpc.json /client_grpc.json
-COPY client_xhttp.json /client_grpc.json
+COPY client_xhttp.json /client_xhttp.json
 
 RUN mkdir -p /connection
 
