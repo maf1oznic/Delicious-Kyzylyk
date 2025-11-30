@@ -5,7 +5,7 @@ networks:
 services:
   xray:
     container_name: xray
-    image: ghcr.io/xtls/xray-core:sha-f35fb08-ls
+    image: ghcr.io/xtls/xray-core:25.10.15
     networks:
       - bridge
     #build: xray_container/.
