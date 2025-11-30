@@ -10,7 +10,7 @@ services:
       - bridge
     #build: xray_container/.
     volumes:    
-      - ./xray:/etc/xray
+      - ./xray:/usr/local/etc/xray
       - ./certbot-etc:/etc/letsencrypt/
     depends_on:
       xray_configurator: 

@@ -1,7 +1,7 @@
 {
     "log": {
-        "access": "/etc/xray/access.log",
-        "error": "/etc/xray/error.log",
+        "access": "/usr/local/etc/xray/access.log",
+        "error": "/usr/local/etc/xray/error.log",
         "loglevel": "error"
     },
     "routing": {
