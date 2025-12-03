@@ -6,7 +6,13 @@
     },
     "routing": {
         "domainStrategy": "AsIs",
-        "rules": []
+        "rules": [
+            {
+                "type": "field",
+                "protocol": ["bittorrent"],
+                "outboundTag": "block"
+            }
+        ]
     },
     "inbounds": [
         {
@@ -45,7 +51,8 @@
                 "enabled": true,
                 "destOverride": [
                     "http",
-                    "tls"
+                    "tls",
+                    "quic"
                 ]
             }
         }
