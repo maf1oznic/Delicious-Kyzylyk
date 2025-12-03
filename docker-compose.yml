@@ -5,6 +5,7 @@ networks:
 services:
   xray:
     container_name: xray
+    restart: unless-stopped
     image: ghcr.io/xtls/xray-core:25.10.15
     networks:
       - bridge
@@ -24,8 +25,8 @@ services:
     build: xray_configurator/.
     environment:
       - SNI=${DOMAIN}
-      - NAME=KYZYLYK
-      - USERCOUNT=50
+      - NAME=${NAME}
+      - USERCOUNT=${USERCOUNT}
     env_file: .env
     networks:
       - bridge

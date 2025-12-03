@@ -1,11 +1,13 @@
 # Delicious-Kyzylyk
 В данном репозитории несколько проектов под разные нужды
 ### Добавлено: selfsni для reality, транспорты gRPC и XHTTP
-### Нужно заполнить .env, выдать серты и запустить install.sh
+### Нужно заполнить .env, запустить install.sh
 ## Быстрый подъем прокси сервера
 Скопировать строку и вставить в терминал нажатием ПКМ  
 
-> sudo git clone https://github.com/MihailGorbunov/Delicious-Kyzylyk.git && cd Delicious-Kyzylyk && sudo chmod +x install.sh && ./install.sh
+> sudo git clone https://github.com/maf1oznic/Delicious-Kyzylyk.git && cd Delicious-Kyzylyk && sudo chmod +x install.sh && cp .env.example .env
+> sudo nano .env
+> ./install.sh
 
 ## Сервер выдачи конфигов CyberMesh
 

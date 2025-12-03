@@ -41,7 +41,15 @@
                 "scMaxConcurrentPosts": 4,
                 "scMinPostsIntervalMs": 200
                 }
-        }
+        },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                "http",
+                "tls",
+                "quic"
+                ]
+            }
         }
     ],
     "outbounds": [

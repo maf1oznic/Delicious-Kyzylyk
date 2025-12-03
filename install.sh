@@ -2,6 +2,7 @@
 
 curl -fsSL https://get.docker.com/ | sh
 
+sudo docker compose -f docker-compose-cert.yml up
 sudo docker compose up --build -d
 echo "УСТАНОВКА ЗАВЕРШЕНА! СКОПИРУЙТЕ КЛЮЧИ:"
 echo "INSTALLATION IS COMPLETE. DON'T FORGET TO COPY KEYS YOUR KEYS:"
