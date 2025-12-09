@@ -34,9 +34,23 @@ PUBKEY=$(echo "$key_x25519" | awk '/Public key:/ {print $3}')
 
 SID=$(openssl rand -hex 8)
 
+# Determine dest and xver based on SELFSNI
+if [ "$SELFSNI" = "true" ]; then
+    DEST="nginx:8443"
+    XVER=1
+    echo "Using self-signed SNI (dest: $DEST, xver: $XVER)"
+else
+    DEST="#SNI:443"
+    XVER=0
+    echo "Using public SNI (dest: $DEST, xver: $XVER)"
+fi
+
+# Replace placeholders in config
 sed -i -e "s/#PKEY/$PKEY/g" /etc/xray/config.json
 sed -i -e "s/#SID/$SID/g" /etc/xray/config.json
 sed -i -e "s/#SNI/$SNI/g" /etc/xray/config.json
+sed -i -e "s|#DEST|$DEST|g" /etc/xray/config.json
+sed -i -e "s/#XVER/$XVER/g" /etc/xray/config.json
 
 # Connection string for ease of access
 IP=$(curl -s ipinfo.io/ip)
@@ -85,7 +99,8 @@ echo "\"PUBKEY\" : \"$PUBKEY\"," >> /connection/connection.txt
 echo "\"UUID\" : \"$UUID\"," >> /connection/connection.txt
 echo "\"SID\" : \"$SID\"," >> /connection/connection.txt
 echo "\"SNI\" : \"$SNI\"," >> /connection/connection.txt
-echo "\"TRANSPORT\" : \"$TRANSPORT\"" >> /connection/connection.txt
+echo "\"TRANSPORT\" : \"$TRANSPORT\"," >> /connection/connection.txt
+echo "\"SELFSNI\" : \"$SELFSNI\"" >> /connection/connection.txt
 echo '}' >> /connection/connection.txt
 
 fi
