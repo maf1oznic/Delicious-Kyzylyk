@@ -35,6 +35,7 @@
                         "#SNI"
                     ],
                     "privateKey": "#PKEY",
+                    "fingerprint": "chrome",
                     "minClientVer": "",
                     "maxClientVer": "",
                     "maxTimeDiff": 0,

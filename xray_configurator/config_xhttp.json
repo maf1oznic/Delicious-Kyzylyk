@@ -35,19 +35,25 @@
                 ],
                 "certificates": [
                     {
+                    "buildChain": false,   
                     "certificateFile": "/etc/letsencrypt/live/#SNI/fullchain.pem",
-                    "keyFile": "/etc/letsencrypt/live/#SNI/privkey.pem"
+                    "keyFile": "/etc/letsencrypt/live/#SNI/privkey.pem",
+                    "oneTimeLoading": false,
+                    "usage": "encipherment"
                     }
                 ]
                 },
                 "xhttpSettings": {
-                "path": "/xhttp",
-                "mode": "stream-one",
-                "scMaxEachPostBytes": 200000,
-                "scMaxConcurrentPosts": 4,
-                "scMinPostsIntervalMs": 200
+                "headers": {},
+                "host": "#SNI",
+                "path": "/",
+                "mode": "auto",
+                "noSSEHeader": false,
+                "scMaxEachPostBytes": "1000000",
+                "scMaxConcurrentPosts": "20-80",
+                "xPaddingBytes": "100-1000"
                 }
-        },
+            },
             "sniffing": {
                 "enabled": true,
                 "destOverride": [
