@@ -145,7 +145,7 @@ if [ "$SELFSNI" = "true" ]; then
     echo "Проверяем, указывает ли домен $DOMAIN на IP этого сервера..."
     
     # Получаем IP сервера
-    SERVER_IP=$(curl -s ifconfig.me)
+    SERVER_IP=$(curl -s 2ip.ru)
     if [ -z "$SERVER_IP" ]; then
         warning "Не удалось получить IP сервера. Пробуем альтернативный метод..." "Could not get server IP. Trying alternative method..."
         SERVER_IP=$(curl -s https://api.ipify.org || curl -s https://icanhazip.com || curl -s https://checkip.amazonaws.com)
