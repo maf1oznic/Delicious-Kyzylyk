@@ -50,7 +50,7 @@
                 "mode": "auto",
                 "noSSEHeader": false,
                 "scMaxEachPostBytes": "1000000",
-                "scMaxConcurrentPosts": "20-80",
+                "scMaxConcurrentPosts": "10-80",
                 "xPaddingBytes": "100-1000"
                 }
             },
