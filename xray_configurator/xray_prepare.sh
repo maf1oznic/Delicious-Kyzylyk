@@ -48,8 +48,8 @@ fi
 # Replace placeholders in config
 sed -i -e "s/#PKEY/$PKEY/g" /etc/xray/config.json
 sed -i -e "s/#SID/$SID/g" /etc/xray/config.json
-sed -i -e "s/#SNI/$SNI/g" /etc/xray/config.json
 sed -i -e "s|#DEST|$DEST|g" /etc/xray/config.json
+sed -i -e "s/#SNI/$SNI/g" /etc/xray/config.json
 sed -i -e "s/#XVER/$XVER/g" /etc/xray/config.json
 
 # Connection string for ease of access
