@@ -54,8 +54,6 @@ services:
       POLL_INTERVAL: 1
       DISCONNECT_TIMEOUT: 15
     restart: unless-stopped
-    networks:
-      - bridge
     depends_on:
       - xray
     logging:
