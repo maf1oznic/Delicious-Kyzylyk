@@ -47,7 +47,7 @@ services:
     build: connection_logger/.
     container_name: xray-connection-logger
     volumes:
-      - ./xray/user-connections.log:/logs/user-connections.log
+      - ./logs:/logs
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       XRAY_CONTAINER: xray
