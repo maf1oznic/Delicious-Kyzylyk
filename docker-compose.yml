@@ -43,6 +43,27 @@ services:
       - ./xray:/etc/xray
       - ./connection:/connection
 
+  xray-connection-logger:
+    build: connection_logger/.
+    container_name: xray-connection-logger
+    volumes:
+      - ./xray/user-connections.log:/logs/user-connections.log
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      XRAY_CONTAINER: xray
+      POLL_INTERVAL: 1
+      DISCONNECT_TIMEOUT: 15
+    restart: unless-stopped
+    networks:
+      - bridge
+    depends_on:
+      - xray
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '30m'
+        max-file: '5'
+
   nginx:
     image: nginx
     container_name: nginx
