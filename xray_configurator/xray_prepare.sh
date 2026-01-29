@@ -70,7 +70,7 @@ do
     # New entry in config.json
     NEWCLIENT=$(cat $CLIENT_FILE)
     UUID=$(/xray uuid)
-    NEWCLIENT=$(echo "$NEWCLIENT" | sed "s/#UUID/$UUID/g" | sed "s/#USERNAME/user_$i/g")    
+    NEWCLIENT=$(echo "$NEWCLIENT" | sed "s/#UUID/$UUID/g" | sed "s/#USERNAME/"$NAME"_"$i"/g")    
     if [ ! $i = $USERCOUNT ]; then
     NEWCLIENT+=$',@'
     fi

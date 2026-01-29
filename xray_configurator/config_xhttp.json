@@ -73,5 +73,30 @@
             "protocol": "blackhole",
             "tag": "block"
         }
-    ]
+    ],
+    "stats": {},
+    "api": {
+        "services": [
+        "HandlerService",
+        "StatsService",
+        "RoutingService"
+        ],
+        "listen": "127.0.0.1:61000",
+        "tag": "XRAY_API"
+    },
+    "policy": {
+        "levels": {
+        "0": {
+            "statsUserUplink": true,
+            "statsUserDownlink": true,
+            "statsUserOnline": false
+        }
+        },
+        "system": {
+        "statsInboundDownlink": true,
+        "statsInboundUplink": true,
+        "statsOutboundDownlink": true,
+        "statsOutboundUplink": true
+        }
+    }
 }
