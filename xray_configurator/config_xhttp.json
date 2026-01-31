@@ -16,6 +16,7 @@
     },
     "inbounds": [
         {
+            "tag": "VLESS_XHTTP_TLS",
             "port": 443,
             "protocol": "vless",
             "settings": {
