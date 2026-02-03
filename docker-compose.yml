@@ -13,6 +13,8 @@ services:
     volumes:    
       - ./xray:/usr/local/etc/xray
       - ./certbot-etc:/etc/letsencrypt/
+    environment:
+      - TZ=UTC
     depends_on:
       xray_configurator: 
         condition: service_completed_successfully
@@ -53,6 +55,7 @@ services:
       XRAY_CONTAINER: xray
       POLL_INTERVAL: 1
       DISCONNECT_TIMEOUT: 15
+      TZ: UTC
     restart: unless-stopped
     depends_on:
       - xray
