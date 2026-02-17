@@ -54,7 +54,7 @@ services:
     environment:
       XRAY_CONTAINER: xray
       POLL_INTERVAL: 1
-      DISCONNECT_TIMEOUT: 15
+      DISCONNECT_TIMEOUT: 60
       TZ: UTC
     restart: unless-stopped
     depends_on:
