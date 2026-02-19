@@ -52,6 +52,59 @@ sed -i -e "s|#DEST|$DEST|g" /etc/xray/config.json
 sed -i -e "s/#SNI/$SNI/g" /etc/xray/config.json
 sed -i -e "s/#XVER/$XVER/g" /etc/xray/config.json
 
+# Inject jump outbound or restore `direct` outbound depending on `JUMP`.
+# Insert placeholder-based jump block and then replace placeholders using sed
+awk -v jump="$JUMP" '{
+    if ($0 ~ /#JUMP_OUTBOUND/) {
+        if (jump == "true") {
+            print "        {";
+            print "            \"tag\": \"jump\",";
+            print "            \"protocol\": \"vless\",";
+            print "            \"settings\": {";
+            print "                \"vnext\": [";
+            print "                    {";
+            print "                        \"port\": #EXIT_PORT,";
+            print "                        \"users\": [";
+            print "                            {";
+            print "                                \"id\": \"#EXIT_UUID\",";
+            print "                                \"flow\": \"xtls-rprx-vision\",";
+            print "                                \"encryption\": \"none\"";
+            print "                            }";
+            print "                        ],";
+            print "                        \"address\": \"#EXIT_IP\"";
+            print "                    }";
+            print "                ]";
+            print "            },";
+            print "            \"streamSettings\": {";
+            print "                \"network\": \"tcp\",";
+            print "                \"security\": \"reality\",";
+            print "                \"realitySettings\": {";
+            print "                    \"shortId\": \"#EXIT_SHORT_ID\",";
+            print "                    \"publicKey\": \"#EXIT_PUBLIC_KEY\",";
+            print "                    \"serverName\": \"#EXIT_SNI_DEST\",";
+            print "                    \"fingerprint\": \"chrome\"";
+            print "                }";
+            print "            }";
+            print "        },";
+        } else {
+            print "        {";
+            print "            \"protocol\": \"freedom\",";
+            print "            \"tag\": \"direct\"";
+            print "        },";
+        }
+    } else {
+        print;
+    }
+}' /etc/xray/config.json > /etc/xray/config.json.tmp && mv /etc/xray/config.json.tmp /etc/xray/config.json
+
+# Now replace jump placeholders from environment (no defaults; if empty they'll be blank)
+sed -i -e "s/#EXIT_PORT/$EXIT_PORT/g" /etc/xray/config.json
+sed -i -e "s/#EXIT_UUID/$EXIT_UUID/g" /etc/xray/config.json
+sed -i -e "s/#EXIT_IP/$EXIT_IP/g" /etc/xray/config.json
+sed -i -e "s/#EXIT_SHORT_ID/$EXIT_SHORT_ID/g" /etc/xray/config.json
+sed -i -e "s/#EXIT_PUBLIC_KEY/$EXIT_PUBLIC_KEY/g" /etc/xray/config.json
+sed -i -e "s/#EXIT_SNI_DEST/$EXIT_SNI_DEST/g" /etc/xray/config.json
+
 # Connection string for ease of access
 IP=$(curl -s ipinfo.io/ip)
 

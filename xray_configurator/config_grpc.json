@@ -60,10 +60,7 @@
         }
     ],
     "outbounds": [
-        {
-            "protocol": "freedom",
-            "tag": "direct"
-        },
+        #JUMP_OUTBOUND
         {
             "protocol": "blackhole",
             "tag": "block"

@@ -8,7 +8,7 @@ from datetime import datetime
 # === НАСТРОЙКИ ===
 XRAY_CONTAINER = os.getenv("XRAY_CONTAINER", "xray")
 POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "1"))
-DISCONNECT_TIMEOUT = int(os.getenv("DISCONNECT_TIMEOUT", "15"))
+DISCONNECT_TIMEOUT = int(os.getenv("DISCONNECT_TIMEOUT", "60"))
 LOG_FILE = "/logs/user-connections.log"
 
 users = {}
