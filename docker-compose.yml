@@ -85,3 +85,22 @@ services:
       options:
         max-size: '30m'
         max-file: '5'
+
+  filebeat:
+    user: root
+    image: docker.elastic.co/beats/filebeat:9.3.0
+    restart: unless-stopped
+    container_name: filebeat
+    env_file: .env
+    volumes:
+      - ./filebeat/volume:/usr/share/filebeat/data
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./xray:/var/log/xray:ro
+      - ./logs:/var/log/snitch:ro
+    depends_on:
+      - xray-connection-logger
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '30m'
+        max-file: '5'

@@ -1,0 +1,30 @@
+name: "${FILEBEAT_NAME}"
+
+logging.level: info
+logging.to_stderr: true
+
+output.logstash:
+  hosts: ["${LOGSTASH_HOST}:5044"]
+
+filebeat.inputs:
+  - type: filestream
+    id: xray-access
+    enabled: true
+    paths:
+      - /var/log/xray/access.log
+    fields:
+      app: xray-access
+    fields_under_root: true
+    prospector.scanner.fingerprint.enabled: false
+    file_identity.native: ~
+
+  - type: filestream
+    id: xray-connections
+    enabled: true
+    paths:
+      - /var/log/snitch/user-connections.log
+    fields:
+      app: xray-connections
+    fields_under_root: true
+    prospector.scanner.fingerprint.enabled: false
+    file_identity.native: ~
