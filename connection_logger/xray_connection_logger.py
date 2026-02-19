@@ -9,6 +9,7 @@ from datetime import datetime
 XRAY_CONTAINER = os.getenv("XRAY_CONTAINER", "xray")
 POLL_INTERVAL = int(os.getenv("POLL_INTERVAL", "1"))
 DISCONNECT_TIMEOUT = int(os.getenv("DISCONNECT_TIMEOUT", "60"))
+CONNECT_CONFIRM_SECONDS = 5
 LOG_FILE = "/logs/user-connections.log"
 
 users = {}
@@ -57,8 +58,6 @@ def parse_users(stats):
     return res
 
 def main():
-    # print("Xray online logger with session_id + duration started", flush=True)
-
     while True:
         now = time.time()
         data = get_stats()
@@ -78,7 +77,8 @@ def main():
                     "last_activity": now,
                     "online": False,
                     "session_id": None,
-                    "connect_time": None
+                    "connect_time": None,
+                    "pending_since": None
                 }
                 continue
 
@@ -87,11 +87,27 @@ def main():
             if delta > 0:
                 state["last_activity"] = now
 
-                if not state["online"]:
+                # Если уже онлайн — просто обновляем счетчик
+                if state["online"]:
+                    state["last_total"] = total
+                    continue
+
+                # Если не онлайн — начинаем отсчет подтверждения
+                if state["pending_since"] is None:
+                    state["pending_since"] = now
+
+                # Проверяем прошло ли 5 секунд непрерывного трафика
+                elif now - state["pending_since"] >= CONNECT_CONFIRM_SECONDS:
                     state["online"] = True
                     state["session_id"] = uuid.uuid4().hex
-                    state["connect_time"] = now
+                    state["connect_time"] = state["pending_since"]
                     log_event("CONNECT", user, state["session_id"])
+
+                    state["pending_since"] = None
+
+            else:
+                # Если трафик прекратился — сбрасываем ожидание CONNECT
+                state["pending_since"] = None
 
             state["last_total"] = total
 
@@ -109,6 +125,7 @@ def main():
                 state["online"] = False
                 state["session_id"] = None
                 state["connect_time"] = None
+                state["pending_since"] = None
 
         time.sleep(POLL_INTERVAL)
 
