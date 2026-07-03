@@ -6,7 +6,7 @@ services:
   xray:
     container_name: xray
     restart: unless-stopped
-    image: ghcr.io/xtls/xray-core:25.10.15
+    image: ghcr.io/xtls/xray-core:latest
     networks:
       - bridge
     user: root
