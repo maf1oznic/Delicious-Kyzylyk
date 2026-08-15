@@ -5,10 +5,10 @@
 ## Быстрый подъем прокси сервера
 Скопировать строку и вставить в терминал нажатием ПКМ  
 ```
-sudo git clone https://github.com/maf1oznic/Delicious-Kyzylyk.git && cd Delicious-Kyzylyk && sudo chmod +x install.sh && sudo cp .env.example .env
+git clone https://github.com/maf1oznic/Delicious-Kyzylyk.git && cd Delicious-Kyzylyk && sudo chmod +x install.sh && cp .env.example .env
 ```
 ```
-sudo nano .env
+nano .env
 ```
 ```
 ./install.sh
